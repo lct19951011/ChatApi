@@ -70,6 +70,7 @@ class Kernel extends HttpKernel
         'token' => \App\Http\Middleware\CheckToken::class,
         'role' => \App\Http\Middleware\CheckRole::class,
         'chat' => \App\Http\Middleware\ChatApi::class,
+        'chatapp' => \App\Http\Middleware\ChatForApp::class,
     ];
 
     /**
