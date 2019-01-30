@@ -37,7 +37,7 @@ Route::get('post/{id}', function ($id) {
 
 
 //最简单的
-Route::get('hello', function () {
+Route::post('hello', function () {
     return 'Hello, Welcome to LaravelAcademy.org';
 });
 
@@ -97,7 +97,26 @@ Route::get('user/profile', function () {
     return 'my url: ' . route('profile');
 })->name('profile');
 
-// Route::get('user/{id}/profile', function ($id) {
-//     $url = route('profile', ['id' => 1]);
-//     return $url;
-// })->name('profile');
+Route::get('user/{id}/profile', function ($id) {
+    $url = route('profile', ['id' => 1]);
+    return $url;
+})->name('profile');
+
+
+//要给某个路由分组中定义的所有路由分配中间件，可以在定义分组之前使用 middleware 方法。中间件将会按照数组中定义的顺序依次执行
+Route::middleware(['first', 'second'])->group(function () {
+    Route::get('/', function () {
+        // Uses first & second Middleware
+    });
+
+    Route::get('user/profile', function () {
+        // Uses first & second Middleware
+    });
+});
+
+
+
+//路由分组另一个通用的例子是使用 namespace 方法分配同一个 PHP 命名空间给该分组下的多个控制器：
+Route::namespace('Admin')->group(function () {
+    // Controllers Within The "App\Http\Controllers\Admin" Namespace
+});

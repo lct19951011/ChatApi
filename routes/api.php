@@ -67,3 +67,8 @@ Route::get('/', function () {
 Route::group(['middleware' => ['web']], function () {
     //
 });
+
+
+Route::get('users/{user}', function (App\User $user) {
+    return $user->email;
+});
